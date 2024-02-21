@@ -18,4 +18,27 @@ public class ClientServiceImpl {
         return clientRepository.getAll();
     }
 
+    public void create(Client client) {
+        Client existingClientNiss = findClientByNiss( client.getNiss() );
+
+        if( existingClientNiss == null ) {
+            clientRepository.create(client);
+            System.out.println(" Votre client(e) est bien enregistré(e) ! ");
+        } else {
+            System.out.println(" Le niss que vous avez entrez existe déjà !");
+        }
+    }
+
+    private Client findClientByNiss(String niss) {
+        List<Client> clients = clientRepository.getAll();
+
+        for( Client client : clients ) {
+            if ( client.getNiss().equals(niss) ) {
+                return client;
+            }
+        }
+
+        return null;
+    }
+
 }

@@ -1,6 +1,7 @@
 package be.brahms.submain;
 
 import be.brahms.Main;
+import be.brahms.entities.Client;
 import be.brahms.services.ClientServiceImpl;
 
 import java.util.Scanner;
@@ -9,14 +10,10 @@ public class ClientManager {
 
     public static void clients() {
 
-        //Call my service
-        ClientServiceImpl clientService = new ClientServiceImpl();
-
         // Declare variables
         Scanner scan = new Scanner(System.in);
         int choice;
         boolean stopMethode = false;
-        String name, firstname, niss, email, phonenumber;
 
         do {
 
@@ -35,12 +32,7 @@ public class ClientManager {
             switch (choice) {
                 case 1 -> {
                     System.out.println(" \n Création d'un client \n " );
-                    System.out.println("Nom");
-                    System.out.println("prenom");
-                    System.out.println("niss");
-                    System.out.println("email");
-                    System.out.println("num gsm");
-
+                    createClient();
                 }
                 case 2 -> {
                     System.out.println(" \n Modification du client \n " );
@@ -60,7 +52,6 @@ public class ClientManager {
                 }
                 case 6 -> {
                     System.out.println(" \n Voir la liste des clients \n");
-                    System.out.println(clientService.getAllClients());
                 }
                 case 0 -> {
                     System.out.println(" Vous serez rediriger vers le menu principal");
@@ -71,6 +62,40 @@ public class ClientManager {
             }
 
         } while( !stopMethode );
+    }
+
+    private static void createClient() {
+
+        //Call my service
+        ClientServiceImpl clientService = new ClientServiceImpl();
+
+        //Declare variable
+        Scanner scan = new Scanner(System.in);
+        String name, firstname, niss, email, phonenumber;
+
+        System.out.println("Nom");
+        name = scan.nextLine();
+
+        System.out.println("prenom");
+        firstname = scan.nextLine();
+
+        System.out.println("niss");
+        niss = scan.nextLine();
+
+        System.out.println("email");
+        email = scan.nextLine();
+
+        System.out.println("num gsm");
+        phonenumber = scan.nextLine();
+
+        Client newClient = new Client();
+        newClient.setName(name);
+        newClient.setFirstname(firstname);
+        newClient.setNiss(niss);
+        newClient.setEmail(email);
+        newClient.setPhoneNumber(phonenumber);
+
+        clientService.create(newClient);
     }
 
 
