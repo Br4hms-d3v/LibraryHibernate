@@ -12,8 +12,12 @@ import java.util.List;
 
 public class ClientRepositoryImpl implements ClientRepository {
 
+    //Connect to DataBase
     private static final SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
+    /**
+     * @return All clients
+     */
     @Override
     public List<Client> getAll() {
         try (Session session = sf.openSession()) {
@@ -33,6 +37,9 @@ public class ClientRepositoryImpl implements ClientRepository {
         return null;
     }
 
+    /**
+     * @return a new client
+     */
     @Override
     public void create(Client client) {
 
@@ -49,24 +56,19 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     }
 
+    /**
+     * @return a update client
+     */
     @Override
     public Client update(long id, Client client) {
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
         Session s = sf.openSession();
         Transaction tx = null;
 
         try {
             Client updateClient = s.get(Client.class, id);
 
-<<<<<<< HEAD
-            if( updateClient != null ) {
-=======
             if (updateClient != null) {
                 // Mettez à jour uniquement le champ spécifique
->>>>>>> dev
                 if (client.getName() != null) {
                     updateClient.setName(client.getName());
                 }
@@ -101,12 +103,6 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public Client findById(long id) {
-        Session s = sf.openSession();
-
-        try {
-            return s.get(Client.class, id);
-        } finally {
-            s.close();
-        }
+        return null;
     }
 }
