@@ -4,6 +4,7 @@ import be.brahms.Main;
 import be.brahms.entities.Client;
 import be.brahms.services.ClientServiceImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ClientManager {
@@ -57,6 +58,7 @@ public class ClientManager {
                 }
                 case 6 -> {
                     System.out.println(" \n Voir la liste des clients \n");
+                    listClients();
                 }
                 case 0 -> {
                     System.out.println(" Vous serez rediriger vers le menu principal");
@@ -182,6 +184,22 @@ public class ClientManager {
 
         } while( !stopMethode );
 
+    }
+
+    /**
+     *
+     * LIST CLIENTS
+     *
+     */
+    private static void listClients() {
+
+        ClientServiceImpl clientService = new ClientServiceImpl();
+        List<Client> clients = clientService.getAllClients();
+
+        for( Client client : clients ) {
+            System.out.println(" Niss => " + client.getNiss() + " | Nom et Prénom: " + client.getName().toUpperCase() + " " + client.getFirstname() +" ." +
+                    " | Email: " + client.getEmail() + " | GSM: " + client.getPhoneNumber());
+        }
     }
 
 }
