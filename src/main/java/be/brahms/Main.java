@@ -1,6 +1,5 @@
 package be.brahms;
 
-import be.brahms.services.ClientServiceImpl;
 import be.brahms.submain.AuthorManager;
 import be.brahms.submain.BookManager;
 import be.brahms.submain.ClientManager;

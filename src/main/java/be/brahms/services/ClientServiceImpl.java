@@ -37,8 +37,11 @@ public class ClientServiceImpl {
                 return client;
             }
         }
-
         return null;
+    }
+
+    public void update( long id, Client client ) {
+        clientRepository.update(id, client);
     }
 
 }
