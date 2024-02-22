@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Client {
 
     @Id @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private long id;
+    private Long id;
 
     @Column( name = "niss", unique = true, nullable = false )
     private String niss;

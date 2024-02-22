@@ -98,11 +98,30 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public void delete(long id) {
+        Session s = sf.openSession();
+        Transaction tx = null;
+        Client clientToDelete = s.get(Client.class, id);
 
+        try {
+            if( clientToDelete != null ){
+                tx = s.beginTransaction();
+                s.remove(clientToDelete);
+                tx.commit();
+            }
+        } finally {
+            s.close();
+        }
     }
 
     @Override
     public Client findById(long id) {
-        return null;
+
+        Session s = sf.openSession();
+        try {
+            return s.get(Client.class, id);
+        } finally {
+            s.close();
+        }
+
     }
 }

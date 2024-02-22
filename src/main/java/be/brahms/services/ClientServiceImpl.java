@@ -52,10 +52,27 @@ public class ClientServiceImpl {
     }
 
     /**
-     * @return a update client
+     * Update client
      */
     public void update( long id, Client client ) {
         clientRepository.update(id, client);
+    }
+
+    /**
+     *
+     * Delete a client by id
+     */
+    public void delete(long id) {
+        // Get All data from idClient
+        Client client = clientRepository.findById(id);
+
+        if ( client != null && client.getId() != null ){
+            clientRepository.delete(id);
+            System.out.println(" Le client: " + client.getName() + " " + client.getFirstname() + " a bien été supprimé! ");
+        } else {
+            System.out.println(" Le client: " + id + " n'existe pas! ");
+        }
+
     }
 
 }

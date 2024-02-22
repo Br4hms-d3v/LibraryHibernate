@@ -46,7 +46,7 @@ public class ClientManager {
                 }
                 case 3 -> {
                     System.out.println(" \n Supression d'un client \n " );
-
+                    deleteClient();
                 }
                 case 4 -> {
                     System.out.println(" \n Recherche le nom du client \n " );
@@ -200,6 +200,27 @@ public class ClientManager {
             System.out.println(" Niss => " + client.getNiss() + " | Nom et Prénom: " + client.getName().toUpperCase() + " " + client.getFirstname() +" ." +
                     " | Email: " + client.getEmail() + " | GSM: " + client.getPhoneNumber());
         }
+    }
+
+    /**
+     *
+     * DELETE CLIENTS
+     *
+     */
+    private static void deleteClient() {
+
+        // Call Service
+        ClientServiceImpl clientService = new ClientServiceImpl();
+
+        //Declare variable
+        Scanner scan = new Scanner(System.in);
+        int idClient;
+
+        System.out.println("Entrez l'id du client auquel vous voulez supprimer ?");
+        idClient = Integer.parseInt(scan.nextLine());
+
+       clientService.delete(idClient);
+
     }
 
 }
