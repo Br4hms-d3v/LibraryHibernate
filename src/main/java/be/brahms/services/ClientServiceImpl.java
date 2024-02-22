@@ -8,16 +8,24 @@ import java.util.List;
 
 public class ClientServiceImpl {
 
+    // Call my repository
     private final ClientRepository clientRepository;
 
+    //Constructor
     public ClientServiceImpl() {
         this.clientRepository = new ClientRepositoryImpl();
     }
 
+    /**
+     * @return All Clients
+     */
     public List<Client> getAllClients() {
         return clientRepository.getAll();
     }
 
+    /**
+     * @return a new Client
+     */
     public void create(Client client) {
         Client existingClientNiss = findClientByNiss( client.getNiss() );
 
@@ -29,6 +37,9 @@ public class ClientServiceImpl {
         }
     }
 
+    /**
+     * @return a NISS Client
+     */
     private Client findClientByNiss(String niss) {
         List<Client> clients = clientRepository.getAll();
 
@@ -40,6 +51,9 @@ public class ClientServiceImpl {
         return null;
     }
 
+    /**
+     * @return a update client
+     */
     public void update( long id, Client client ) {
         clientRepository.update(id, client);
     }

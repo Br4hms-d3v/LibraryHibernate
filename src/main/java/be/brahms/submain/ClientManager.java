@@ -8,6 +8,11 @@ import java.util.Scanner;
 
 public class ClientManager {
 
+    /**
+     *
+     * MAIN MENU FOR CLIENT
+     *
+     */
     public static void clients() {
 
         // Declare variables
@@ -64,6 +69,11 @@ public class ClientManager {
         } while( !stopMethode );
     }
 
+    /**
+     *
+     * CREATE A NEW CLIENT
+     *
+     */
     private static void createClient() {
 
         //Call my service
@@ -98,6 +108,11 @@ public class ClientManager {
         clientService.create(newClient);
     }
 
+    /**
+     *
+     * UPDATE A CLIENT
+     *
+     */
     private static void updateClient() {
 
         //Call my service
