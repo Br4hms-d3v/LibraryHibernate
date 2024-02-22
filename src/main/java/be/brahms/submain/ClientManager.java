@@ -36,7 +36,7 @@ public class ClientManager {
                 }
                 case 2 -> {
                     System.out.println(" \n Modification du client \n " );
-
+                    updateClient();
                 }
                 case 3 -> {
                     System.out.println(" \n Supression d'un client \n " );
@@ -64,6 +64,8 @@ public class ClientManager {
         } while( !stopMethode );
     }
 
+
+    // Create a new client
     private static void createClient() {
 
         //Call my service
@@ -96,6 +98,77 @@ public class ClientManager {
         newClient.setPhoneNumber(phonenumber);
 
         clientService.create(newClient);
+    }
+
+    // Update a client
+    private static void updateClient() {
+
+        //Call my service
+        ClientServiceImpl clientService = new ClientServiceImpl();
+
+        //Declare variable
+        Scanner scan = new Scanner(System.in);
+        int choice, idClient;
+        boolean stopMethode = false;
+        String name, firstname, niss, email, phonenumber;
+        Client updateClient = new Client();
+
+        System.out.println("Entrez l'ID du client");
+        idClient = Integer.parseInt( scan.nextLine() );;
+
+        do {
+
+            // This is the main for my application
+            System.out.println("""
+                     Que souhaitez-vous modifier: \s
+                    1- Nom\s
+                    2- Prénom\s
+                    3- Niss\s
+                    4- Email\s
+                    5- Numéro de GSM\s
+                    0- Pour revenir en arrière""");
+            choice = Integer.parseInt( scan.nextLine() );
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.println(" \n Entrez le nom de famille: " );
+                    name = scan.next();
+                    updateClient.setName(name);
+                    clientService.update(idClient, updateClient);
+                }
+                case 2 -> {
+                    System.out.println(" \n Entrez le prénom: " );
+                    firstname = scan.nextLine();
+                    updateClient.setFirstname(firstname);
+                    clientService.update(idClient, updateClient);
+                }
+                case 3 -> {
+                    System.out.println(" \n Entrez le niss: " );
+                    niss = scan.nextLine();
+                    updateClient.setNiss(niss);
+                    clientService.update(idClient, updateClient);
+                }
+                case 4 -> {
+                    System.out.println(" \n Entrez l'adresse email: " );
+                    email = scan.nextLine();
+                    updateClient.setEmail(email);
+                    clientService.update(idClient, updateClient);
+                }
+                case 5 -> {
+                    System.out.println(" \n Entrez le numéro de GSM: " );
+                    phonenumber = scan.nextLine();
+                    updateClient.setPhoneNumber(phonenumber);
+                    clientService.update(idClient, updateClient);
+                }
+                case 0 -> {
+                    System.out.println(" Vous serez rediriger vers le menu principal");
+                    stopMethode = true ;
+                    clients();
+                }
+                default -> System.out.println(" Veuillez choisir le numéro 1, 2, 3, 4, 5 ou 0" );
+            }
+
+        } while( !stopMethode );
     }
 
 

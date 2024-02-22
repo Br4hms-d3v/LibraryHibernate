@@ -1,11 +1,11 @@
 package be.brahms;
 
-import be.brahms.services.ClientServiceImpl;
 import be.brahms.submain.AuthorManager;
 import be.brahms.submain.BookManager;
 import be.brahms.submain.ClientManager;
 import be.brahms.submain.ReservationManager;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {

@@ -10,7 +10,7 @@ public interface ClientRepository {
     Client getByNiss( String niss );
     Client getByName( String name );
     void create( Client client );
-    Client update( long id, Client client );
+    Client update(long id, Client client );
     void delete( long id );
-
+    Client findById(long id);
 }
