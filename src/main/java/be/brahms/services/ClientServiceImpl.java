@@ -27,7 +27,7 @@ public class ClientServiceImpl {
      * @return a new Client
      */
     public void create(Client client) {
-        Client existingClientNiss = findClientByNiss( client.getNiss() );
+        Client existingClientNiss = getByNiss( client.getNiss() );
 
         if( existingClientNiss == null ) {
             clientRepository.create(client);
@@ -40,15 +40,16 @@ public class ClientServiceImpl {
     /**
      * @return a NISS Client
      */
-    private Client findClientByNiss(String niss) {
-        List<Client> clients = clientRepository.getAll();
+    public Client getByNiss(String niss) {
 
-        for( Client client : clients ) {
-            if ( client.getNiss().equals(niss) ) {
-                return client;
-            }
+        Client existingClientNiss = clientRepository.getByNiss(niss);
+
+        if( existingClientNiss != null ) {
+            return existingClientNiss;
+        } else {
+            System.out.println(" Le client avec le Niss: " + existingClientNiss +" n'existe pas dans la base de données! ");
+            return null;
         }
-        return null;
     }
 
     /**

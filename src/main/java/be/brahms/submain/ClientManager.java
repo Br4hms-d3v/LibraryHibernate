@@ -54,7 +54,7 @@ public class ClientManager {
                 }
                 case 5 -> {
                     System.out.println(" \n Recherche du client via le niss \n " );
-
+                    searchClientByNiss();
                 }
                 case 6 -> {
                     System.out.println(" \n Voir la liste des clients \n");
@@ -247,6 +247,29 @@ public class ClientManager {
             System.out.println(" Niss => " + client.getNiss() + " | Nom et Prénom: " + client.getName().toUpperCase() + " " + client.getFirstname() +" ." +
                     " | Email: " + client.getEmail() + " | GSM: " + client.getPhoneNumber());
         }
+
+    }
+
+    /**
+     *
+     * SEARCH CLIENT BY NISS
+     *
+     */
+    private static void searchClientByNiss() {
+        //Call my service
+        ClientServiceImpl clientService = new ClientServiceImpl();
+        Scanner scan = new Scanner(System.in);
+
+        //Declare variable
+        String niss;
+
+        System.out.println("Entrez le Niss du client!");
+        niss = scan.nextLine();
+
+        Client clientByNiss = clientService.getByNiss(niss);
+
+        System.out.println(" Niss => " + clientByNiss.getNiss() + "\n Nom et Prénom: " + clientByNiss.getName().toUpperCase() + " " + clientByNiss.getFirstname() +" ." +
+                "\n Email: " + clientByNiss.getEmail() + "\n GSM: " + clientByNiss.getPhoneNumber());
 
     }
 

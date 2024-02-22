@@ -29,7 +29,15 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public Client getByNiss(String niss) {
-        return null;
+        Session s = sf.openSession();
+        try {
+            String hql = "FROM Client c WHERE c.niss = :niss";
+            Query query = s.createQuery(hql, Client.class);
+            query.setParameter("niss", niss);
+            return (Client) query.uniqueResult();
+        } finally {
+            s.close();
+        }
     }
 
     @Override
