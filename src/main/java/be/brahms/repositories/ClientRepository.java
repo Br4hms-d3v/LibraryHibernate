@@ -8,7 +8,7 @@ public interface ClientRepository {
 
     List<Client> getAll();
     Client getByNiss( String niss );
-    Client getByName( String name );
+    List<Client> getByName( String name );
     void create( Client client );
     Client update(long id, Client client );
     void delete( long id );

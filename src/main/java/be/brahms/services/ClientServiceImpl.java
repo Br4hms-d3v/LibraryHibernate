@@ -75,4 +75,13 @@ public class ClientServiceImpl {
 
     }
 
+    /**
+     *
+     * Find a client by his name
+     */
+    public List<Client> getClientsByName( String name) {
+
+        return clientRepository.getByName(name);
+    }
+
 }

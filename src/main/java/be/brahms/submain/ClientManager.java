@@ -50,7 +50,7 @@ public class ClientManager {
                 }
                 case 4 -> {
                     System.out.println(" \n Recherche le nom du client \n " );
-
+                    searchClientByName();
                 }
                 case 5 -> {
                     System.out.println(" \n Recherche du client via le niss \n " );
@@ -220,6 +220,33 @@ public class ClientManager {
         idClient = Integer.parseInt(scan.nextLine());
 
        clientService.delete(idClient);
+
+    }
+
+    /**
+     *
+     * SEARCH CLIENT BY NAME
+     *
+     */
+    private static void searchClientByName() {
+        //Call my service
+        ClientServiceImpl clientService = new ClientServiceImpl();
+        Scanner scan = new Scanner(System.in);
+
+        //Declare variable
+        String name;
+
+        System.out.println("Entrez le nom du client ");
+        name = scan.nextLine();
+
+        //Call Service to find client with his name
+        List<Client> clientList = clientService.getClientsByName(name);
+
+
+        for( Client client : clientList ) {
+            System.out.println(" Niss => " + client.getNiss() + " | Nom et Prénom: " + client.getName().toUpperCase() + " " + client.getFirstname() +" ." +
+                    " | Email: " + client.getEmail() + " | GSM: " + client.getPhoneNumber());
+        }
 
     }
 

@@ -33,8 +33,16 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public Client getByName(String name) {
-        return null;
+    public List<Client> getByName(String name) {
+        Session s = sf.openSession();
+        try {
+            String hql = "FROM Client c WHERE c.name = :name ";
+            Query<Client> query = s.createQuery(hql, Client.class);
+            query.setParameter("name", name);
+            return query.getResultList();
+        } finally {
+            s.close();
+        }
     }
 
     /**
