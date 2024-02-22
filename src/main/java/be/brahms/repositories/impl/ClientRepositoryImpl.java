@@ -51,14 +51,22 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public Client update(long id, Client client) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
         Session s = sf.openSession();
         Transaction tx = null;
 
         try {
             Client updateClient = s.get(Client.class, id);
 
+<<<<<<< HEAD
             if( updateClient != null ) {
+=======
+            if (updateClient != null) {
+                // Mettez à jour uniquement le champ spécifique
+>>>>>>> dev
                 if (client.getName() != null) {
                     updateClient.setName(client.getName());
                 }

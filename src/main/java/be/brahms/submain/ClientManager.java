@@ -100,12 +100,16 @@ public class ClientManager {
         clientService.create(newClient);
     }
 
+<<<<<<< HEAD
     // Update a client
+=======
+>>>>>>> dev
     private static void updateClient() {
 
         //Call my service
         ClientServiceImpl clientService = new ClientServiceImpl();
 
+<<<<<<< HEAD
         //Declare variable
         Scanner scan = new Scanner(System.in);
         int choice, idClient;
@@ -115,16 +119,32 @@ public class ClientManager {
 
         System.out.println("Entrez l'ID du client");
         idClient = Integer.parseInt( scan.nextLine() );;
+=======
+        // Declare variables
+        Scanner scan = new Scanner(System.in);
+        Client updateClient = new Client();
+        int choice, idClient;
+        boolean stopMethode = false;
+        String name, firstname, niss, email, phonenumber;
+
+        System.out.println("Veuillez entrez l'ID du client");
+        idClient = Integer.parseInt(scan.nextLine());
+>>>>>>> dev
 
         do {
 
             // This is the main for my application
             System.out.println("""
+<<<<<<< HEAD
                      Que souhaitez-vous modifier: \s
+=======
+                     Que voulez-vous modifier ?\s
+>>>>>>> dev
                     1- Nom\s
                     2- Prénom\s
                     3- Niss\s
                     4- Email\s
+<<<<<<< HEAD
                     5- Numéro de GSM\s
                     0- Pour revenir en arrière""");
             choice = Integer.parseInt( scan.nextLine() );
@@ -133,29 +153,55 @@ public class ClientManager {
                 case 1 -> {
                     System.out.println(" \n Entrez le nom de famille: " );
                     name = scan.next();
+=======
+                    5- Numéro GSM\s
+                    0- Pour revenir en arrière""");
+            choice = Integer.parseInt(scan.nextLine());
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.println(" \n Entrez le nom de famille:" );
+                    name = scan.nextLine();
+>>>>>>> dev
                     updateClient.setName(name);
                     clientService.update(idClient, updateClient);
                 }
                 case 2 -> {
+<<<<<<< HEAD
                     System.out.println(" \n Entrez le prénom: " );
+=======
+                    System.out.println(" \n Entrez le prénom:" );
+>>>>>>> dev
                     firstname = scan.nextLine();
                     updateClient.setFirstname(firstname);
                     clientService.update(idClient, updateClient);
                 }
                 case 3 -> {
+<<<<<<< HEAD
                     System.out.println(" \n Entrez le niss: " );
+=======
+                    System.out.println(" \n Entrez le niss:" );
+>>>>>>> dev
                     niss = scan.nextLine();
                     updateClient.setNiss(niss);
                     clientService.update(idClient, updateClient);
                 }
                 case 4 -> {
+<<<<<<< HEAD
                     System.out.println(" \n Entrez l'adresse email: " );
+=======
+                    System.out.println(" \n Entrez l'adresse email:" );
+>>>>>>> dev
                     email = scan.nextLine();
                     updateClient.setEmail(email);
                     clientService.update(idClient, updateClient);
                 }
                 case 5 -> {
+<<<<<<< HEAD
                     System.out.println(" \n Entrez le numéro de GSM: " );
+=======
+                    System.out.println(" \n Entrez le numéro de GSM:" );
+>>>>>>> dev
                     phonenumber = scan.nextLine();
                     updateClient.setPhoneNumber(phonenumber);
                     clientService.update(idClient, updateClient);
@@ -169,7 +215,12 @@ public class ClientManager {
             }
 
         } while( !stopMethode );
+<<<<<<< HEAD
     }
 
+=======
+
+    }
+>>>>>>> dev
 
 }
