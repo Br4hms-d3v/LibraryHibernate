@@ -268,9 +268,10 @@ public class ClientManager {
 
         Client clientByNiss = clientService.getByNiss(niss);
 
-        System.out.println(" Niss => " + clientByNiss.getNiss() + "\n Nom et Prénom: " + clientByNiss.getName().toUpperCase() + " " + clientByNiss.getFirstname() +" ." +
-                "\n Email: " + clientByNiss.getEmail() + "\n GSM: " + clientByNiss.getPhoneNumber());
-
+        System.out.println(" Niss => " + clientByNiss.getNiss() +
+                "\n Nom et Prénom: " + clientByNiss.getName().toUpperCase() + " " + clientByNiss.getFirstname() +" ." +
+                "\n Email: " + clientByNiss.getEmail() +
+                "\n GSM: " + clientByNiss.getPhoneNumber());
     }
 
 }
