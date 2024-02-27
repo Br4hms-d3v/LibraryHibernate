@@ -26,8 +26,9 @@ public class Reservation {
     @Column( name = "isBack", nullable = false )
     private boolean isBack;
 
-    @OneToMany(mappedBy = "reservation")
-    private List<Book> books;
+    @ManyToOne
+    @JoinColumn( name = "bookId" )
+    private Book book;
 
     @ManyToOne
     @JoinColumn( name = "clientId" )

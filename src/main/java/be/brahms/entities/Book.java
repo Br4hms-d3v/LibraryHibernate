@@ -27,8 +27,4 @@ public class Book {
     @JoinColumn( name = "authorId")
     private Author author;
 
-    @ManyToOne
-    @JoinColumn(name = "reservation_id")
-    private Reservation reservation;
-
 }
