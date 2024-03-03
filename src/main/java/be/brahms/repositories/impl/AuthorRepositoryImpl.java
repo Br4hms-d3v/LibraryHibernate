@@ -53,7 +53,16 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 
     @Override
     public List<Author> getAll() {
-        return null;
+        Session s = sf.openSession();
+
+        try {
+            String hql = "FROM Author";
+            Query<Author> query = s.createQuery(hql, Author.class);
+            return query.getResultList();
+        } finally {
+            s.close();
+        }
+
     }
 
     @Override

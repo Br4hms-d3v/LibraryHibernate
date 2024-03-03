@@ -4,6 +4,7 @@ import be.brahms.Main;
 import be.brahms.entities.Author;
 import be.brahms.services.AuthorServiceImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class AuthorManager {
@@ -47,7 +48,7 @@ public class AuthorManager {
                 }
                 case 5 -> {
                     System.out.println(" \n Recherche du client via le niss \n " );
-                    //listAuthor();
+                    listAuthor();
                 }
                 case 0 -> {
                     System.out.println(" Vous serez rediriger vers le menu principal");
@@ -91,7 +92,7 @@ public class AuthorManager {
 
     /**
      *
-     * UPDATE A CLIENT
+     * UPDATE A AUTHOR
      *
      */
     private static void updateAuthor(){
@@ -144,6 +145,21 @@ public class AuthorManager {
 
         }while( !stopMethode );
 
+    }
+
+    /**
+     *
+     * LIST AUTHOR
+     *
+     */
+    private static void listAuthor() {
+
+        AuthorServiceImpl authorService = new AuthorServiceImpl();
+        List<Author> listAuthors = authorService.getAllAuthors();
+
+        for( Author author : listAuthors ) {
+            System.out.println(" N° " +author.getId() +" : " + author.getName() + " " + author.getFirstname() + " .");
+        }
     }
 
 }
