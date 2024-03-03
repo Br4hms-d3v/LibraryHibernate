@@ -44,7 +44,7 @@ public class AuthorManager {
                 }
                 case 4 -> {
                     System.out.println(" \n Recherche le nom du client \n " );
-                    //searchAuthorByName();
+                    searchAuthorByName();
                 }
                 case 5 -> {
                     System.out.println(" \n Recherche du client via le niss \n " );
@@ -179,6 +179,32 @@ public class AuthorManager {
         idAuthor = Integer.parseInt(scan.nextLine());
 
         authorService.delete(idAuthor);
+
+    }
+
+    /**
+     *
+     * SEARCH CLIENT BY NAME
+     *
+     */
+    private static void searchAuthorByName() {
+
+        // Call service author
+        AuthorServiceImpl authorService = new AuthorServiceImpl();
+
+        // Declare variable
+        Scanner scan = new Scanner(System.in);
+        String name;
+
+        System.out.println("Entrez le nom du client ");
+        name = scan.nextLine();
+
+        List<Author> listAuthors = authorService.getAuthorByName(name);
+
+        for( Author author : listAuthors) {
+            System.out.println( "N° " + author.getId() + " ) " + author.getName() + " " + author.getFirstname());
+        }
+
 
     }
 

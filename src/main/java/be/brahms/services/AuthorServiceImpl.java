@@ -47,4 +47,8 @@ public class AuthorServiceImpl {
             System.out.println(" l'auteur n° " + id + " n'existe pas");
         }
     }
+
+    public List<Author> getAuthorByName( String name ) {
+        return authorRepository.getByName( name );
+    }
 }

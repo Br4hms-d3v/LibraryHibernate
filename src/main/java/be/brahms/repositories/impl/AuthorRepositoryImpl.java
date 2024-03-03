@@ -2,6 +2,7 @@ package be.brahms.repositories.impl;
 
 import be.brahms.entities.Author;
 import be.brahms.repositories.AuthorRepository;
+import be.brahms.services.AuthorServiceImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class AuthorRepositoryImpl implements AuthorRepository {
 
@@ -66,8 +68,19 @@ public class AuthorRepositoryImpl implements AuthorRepository {
     }
 
     @Override
-    public List<Author> getByName() {
-        return null;
+    public List<Author> getByName(String name) {
+
+       Session s = sf.openSession();
+
+       try {
+           String hql = "FROM Author a WHERE a.name = :name";
+           Query<Author> query = s.createQuery(hql, Author.class);
+           query.setParameter("name", name);
+           return query.getResultList();
+       } finally {
+           s.close();
+       }
+
     }
 
     @Override
