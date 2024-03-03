@@ -72,6 +72,19 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 
     @Override
     public void delete(long id) {
+        Session s = sf.openSession();
+        Transaction tx = null;
+        Author authorDelete = s.get(Author.class, id);
+
+        try {
+            if (authorDelete != null ) {
+                tx = s.beginTransaction();
+                s.remove(authorDelete);
+                tx.commit();
+            }
+        } finally {
+            s.close();
+        }
 
     }
 
@@ -91,5 +104,15 @@ public class AuthorRepositoryImpl implements AuthorRepository {
             s.close();
         }
 
+    }
+
+    @Override
+    public Author findById(long id) {
+        Session s = sf.openSession();
+        try {
+            return s.get(Author.class, id);
+        } finally {
+            s.close();
+        }
     }
 }

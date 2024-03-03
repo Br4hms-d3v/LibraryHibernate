@@ -40,7 +40,7 @@ public class AuthorManager {
                 }
                 case 3 -> {
                     System.out.println(" \n Supression d'un client \n " );
-                    //deleteAuthor();
+                    deleteAuthor();
                 }
                 case 4 -> {
                     System.out.println(" \n Recherche le nom du client \n " );
@@ -160,6 +160,26 @@ public class AuthorManager {
         for( Author author : listAuthors ) {
             System.out.println(" N° " +author.getId() +" : " + author.getName() + " " + author.getFirstname() + " .");
         }
+    }
+    /**
+     *
+     * DELETE AUTHOR
+     *
+     */
+    private static void deleteAuthor() {
+
+        // Call my service author
+        AuthorServiceImpl authorService = new AuthorServiceImpl();
+
+        // Declare variables
+        Scanner scan = new Scanner(System.in);
+        int idAuthor;
+
+        System.out.println("Entrez l'ID de l'auteur à supprimer !");
+        idAuthor = Integer.parseInt(scan.nextLine());
+
+        authorService.delete(idAuthor);
+
     }
 
 }

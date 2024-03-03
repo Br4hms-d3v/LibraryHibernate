@@ -36,4 +36,15 @@ public class AuthorServiceImpl {
     public List<Author> getAllAuthors() {
         return authorRepository.getAll();
     }
+
+    public void delete(long id) {
+        Author author = authorRepository.findById(id);
+
+        if (author != null && author.getId() != 0) {
+            authorRepository.delete(id);
+            System.out.println(" L'auteur n° " + author.getId() + " => " + author.getName() + " a bien été supprimé");
+        } else {
+            System.out.println(" l'auteur n° " + id + " n'existe pas");
+        }
+    }
 }
