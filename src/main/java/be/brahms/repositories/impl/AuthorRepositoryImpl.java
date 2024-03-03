@@ -30,6 +30,24 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 
     @Override
     public Author update(long id, Author author) {
+        Session s = sf.openSession();
+        Transaction tx = null;
+
+        try{
+            Author updateAuthor = s.get(Author.class, id);
+
+            if( author.getName() != null ) {
+                updateAuthor.setName( author.getName() );
+            } if ( author.getFirstname() != null ) {
+                updateAuthor.setFirstname( author.getFirstname() );
+            }
+
+            tx = s.beginTransaction();
+            s.merge(updateAuthor);
+            tx.commit();
+        } finally {
+            s.close();
+        }
         return null;
     }
 

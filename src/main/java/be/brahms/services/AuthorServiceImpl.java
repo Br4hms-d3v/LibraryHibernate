@@ -26,4 +26,8 @@ public class AuthorServiceImpl {
             System.out.println(" Votre author est bien enregistré ! ");
         }
     }
+
+    public void update( long id, Author author ) {
+        authorRepository.update(id, author);
+    }
 }

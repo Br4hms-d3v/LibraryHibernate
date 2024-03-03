@@ -35,7 +35,7 @@ public class AuthorManager {
                 }
                 case 2 -> {
                     System.out.println(" \n Modification du client \n " );
-                    //updateAuthor();
+                    updateAuthor();
                 }
                 case 3 -> {
                     System.out.println(" \n Supression d'un client \n " );
@@ -86,6 +86,63 @@ public class AuthorManager {
         newAuthor.setName(name);
         newAuthor.setFirstname(firstname);
         authorService.create(newAuthor);
+
+    }
+
+    /**
+     *
+     * UPDATE A CLIENT
+     *
+     */
+    private static void updateAuthor(){
+
+        //Call my Service Author
+        AuthorServiceImpl authorService = new AuthorServiceImpl();
+
+        //Declare variables
+        Scanner scan = new Scanner(System.in);
+        Author updateAuthor = new Author();
+        int idAuthor, choice;
+        boolean stopMethode = false;
+        String name, firstname;
+
+        System.out.println( "Veuillez entrez l'ID de l'auteur" );
+        idAuthor = Integer.parseInt(scan.nextLine());
+
+        do {
+
+            System.out.println("""
+                    Que voulez-vous modifier ?\s
+                    1- Nom\s
+                    2- Prénom\s
+                    0- Pour revenir en arrière\s                    
+                    """);
+            choice = Integer.parseInt(scan.nextLine());
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.println(" Entrez le nom de famille:");
+                    name = scan.nextLine();
+                    updateAuthor.setName(name);
+                    authorService.update(idAuthor, updateAuthor);
+                }
+                case 2 -> {
+                    System.out.println(" Entrez le prénom:");
+                    firstname = scan.nextLine();
+                    updateAuthor.setFirstname(firstname);
+                    authorService.update(idAuthor, updateAuthor);
+                }
+                case 0 -> {
+                    System.out.println(" Vous serez rediriger vers le menu principal");
+                    stopMethode = true;
+                    authors();
+                }
+                default -> System.out.println(" Veuillez entrez les chiffres suivant: 1 2 ou 0");
+
+
+            }
+
+        }while( !stopMethode );
 
     }
 

@@ -34,7 +34,7 @@ public class Main {
             System.out.println("""
                      Entrez le numéro que vous souhaitez y aller\s
                     1- Clients\s
-                    2- Autheurs\s
+                    2- Auteurs\s
                     3- Livres\s
                     4- Reservations\s
                     0- Quitter le programme""");
