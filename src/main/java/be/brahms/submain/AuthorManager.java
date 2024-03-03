@@ -1,6 +1,8 @@
 package be.brahms.submain;
 
 import be.brahms.Main;
+import be.brahms.entities.Author;
+import be.brahms.services.AuthorServiceImpl;
 
 import java.util.Scanner;
 
@@ -33,19 +35,19 @@ public class AuthorManager {
                 }
                 case 2 -> {
                     System.out.println(" \n Modification du client \n " );
-                    updateAuthor();
+                    //updateAuthor();
                 }
                 case 3 -> {
                     System.out.println(" \n Supression d'un client \n " );
-                    deleteAuthor();
+                    //deleteAuthor();
                 }
                 case 4 -> {
                     System.out.println(" \n Recherche le nom du client \n " );
-                    searchAuthorByName();
+                    //searchAuthorByName();
                 }
                 case 5 -> {
                     System.out.println(" \n Recherche du client via le niss \n " );
-                    listAuthor();
+                    //listAuthor();
                 }
                 case 0 -> {
                     System.out.println(" Vous serez rediriger vers le menu principal");
@@ -56,6 +58,34 @@ public class AuthorManager {
             }
 
         } while( !stopMethode );
+
+    }
+
+    /**
+     *
+     * CREATE A NEW CLIENT
+     *
+     */
+    private static void createAuthor() {
+
+        // Call author service
+        AuthorServiceImpl authorService = new AuthorServiceImpl();
+
+        // Declare variables
+        Scanner scan = new Scanner(System.in);
+        Author newAuthor = new Author();
+        String name, firstname;
+
+        System.out.println(" Entrez le nom de l'auteur");
+        name = scan.nextLine();
+
+        System.out.println(" Entrez le prénom de l'auteur");
+        firstname = scan.nextLine();
+
+        // Taka variable and persit to DataBase
+        newAuthor.setName(name);
+        newAuthor.setFirstname(firstname);
+        authorService.create(newAuthor);
 
     }
 
