@@ -128,4 +128,20 @@ public class AuthorRepositoryImpl implements AuthorRepository {
             s.close();
         }
     }
+
+    @Override
+    public long getAuthorIDByNameAndFirstname(String name, String firstname) {
+        Session s = sf.openSession();
+
+        try {
+            String hql = "SELECT a.id FROM Author a WHERE a.name = :name AND a.firstname = :firstname";
+            Query<Long> query = s.createQuery(hql, Long.class);
+            query.setParameter("name", name);
+            query.setParameter("firstname", firstname);
+            return query.uniqueResultOptional().orElse(0L);
+        }finally {
+            s.close();
+        }
+
+    }
 }

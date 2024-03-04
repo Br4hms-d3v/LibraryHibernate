@@ -13,4 +13,5 @@ public interface AuthorRepository {
     void delete( long id );
     boolean isAuthorExists(String name, String firstname);
     Author findById(long id);
+    long getAuthorIDByNameAndFirstname( String name, String firstname);
 }
