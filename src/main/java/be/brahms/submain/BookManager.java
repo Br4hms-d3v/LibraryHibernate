@@ -36,7 +36,10 @@ public class BookManager {
                     System.out.println(" \n Ajouter un livre \n ");
                     addBook();
                 }
-                case 2 -> {}
+                case 2 -> {
+                    System.out.println(" \n Modifier un livre \n ");
+                    updateBook();
+                }
                 case 3 -> {}
                 case 4 -> {}
                 case 5 -> {}
@@ -106,6 +109,77 @@ public class BookManager {
 
         // Send Object to my Service;
         bookService.create(newBook);
+    }
+
+    /**
+     *
+     * UPDATE A BOOK TO DB
+     *
+     */
+    private static void updateBook(){
+        // Call bookService
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        //Declare variables
+        Scanner scan = new Scanner(System.in);
+        Book updateBook = new Book();
+        Author updateAuthor = new Author();
+
+        String title;
+        long idAuthor;
+        int qtyBooks, nbPages, isbn, choice;
+        boolean stopMethode = false;
+
+        System.out.println( "Veuillez entrez le numéro de ISBN du livre" );
+        isbn = Integer.parseInt(scan.nextLine());
+
+        do {
+            System.out.println("""
+                    1- Titre\s
+                    2- Quantité\s 
+                    3- Nombre de page\s
+                    4- ID de l'auteur\s
+                    0- Pour revenir en arrière\s
+                    """);
+            choice = Integer.parseInt(scan.nextLine());
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.println( "Entrez le titre du livre" );
+                    title = scan.nextLine();
+                    updateBook.setTitle(title);
+                    bookService.update(isbn, updateBook);
+                }
+                case 2 -> {
+                    System.out.println( "Entrez  la quantité disponible" );
+                    qtyBooks = Integer.parseInt(scan.nextLine());
+                    updateBook.setQtyBooks(qtyBooks);
+                    bookService.update(isbn, updateBook);
+                }
+                case 3 -> {
+                    System.out.println( "Entrez le nombre de page" );
+                    nbPages = Integer.parseInt(scan.nextLine());
+                    updateBook.setQtyBooks(nbPages);
+                    bookService.update(isbn, updateBook);
+                }
+                case 4 -> {
+                    System.out.println( "Entrez l'ID de l'auteur" );
+                    idAuthor = Long.parseLong(scan.nextLine());
+
+                    updateAuthor.setId(idAuthor);
+
+                    updateBook.setAuthor(updateAuthor);
+                    bookService.update(isbn, updateBook);
+                }
+                case 0 -> {
+                    System.out.println( "Vous serez rediriger vers le menu principal");
+                    stopMethode = true;
+                    books();
+                }
+                default -> System.out.println( "Veuillez Entrer le numéro entre 1 à 4 ou le 0 pour quitter" );
+            }
+
+        } while ( !stopMethode );
     }
 
 }

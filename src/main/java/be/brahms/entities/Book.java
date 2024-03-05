@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 @Data
 @NoArgsConstructor @AllArgsConstructor
@@ -13,6 +14,7 @@ public class Book {
     @Id @GeneratedValue( strategy = GenerationType.IDENTITY )
     private long id;
 
+    @NaturalId
     @Column( name = "isbn", nullable = false, unique = true)
     private int isbn;
 
