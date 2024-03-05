@@ -14,6 +14,7 @@ public class Book {
     @Id @GeneratedValue( strategy = GenerationType.IDENTITY )
     private long id;
 
+
     @NaturalId //est utilisée pour spécifier qu'une propriété d'une entité devrait être traitée comme un identifiant naturel.
     @Column( name = "isbn", nullable = false, unique = true)
     private int isbn;
