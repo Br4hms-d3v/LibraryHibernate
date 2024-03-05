@@ -1,6 +1,5 @@
 package be.brahms.services;
 
-import be.brahms.entities.Author;
 import be.brahms.entities.Book;
 import be.brahms.repositories.AuthorRepository;
 import be.brahms.repositories.BookRepository;
@@ -48,4 +47,10 @@ public class BookServiceImpl {
         }
 
     }
+
+    // Update a book
+    public void update(int isbn, Book book) {
+            bookRepository.update(isbn, book);
+    }
+
 }
