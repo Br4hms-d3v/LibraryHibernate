@@ -86,7 +86,16 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public List<Book> getAllBooks() {
-        return null;
+        Session s = sf.openSession();
+
+        try {
+            String hql = "FROM Book";
+            Query<Book> query = s.createQuery(hql, Book.class);
+            return query.getResultList();
+        } finally {
+            s.close();
+        }
+
     }
 
     @Override

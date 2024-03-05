@@ -5,6 +5,7 @@ import be.brahms.entities.Author;
 import be.brahms.entities.Book;
 import be.brahms.services.BookServiceImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class BookManager {
@@ -44,7 +45,10 @@ public class BookManager {
                     System.out.println(" \n Supprimer un livre \n ");
                     deleteBook();
                 }
-                case 4 -> {}
+                case 4 -> {
+                    System.out.println( "\n Liste des livres \n" );
+                    listBook();
+                }
                 case 5 -> {}
                 case 6 -> {}
                 case 7 -> {}
@@ -202,6 +206,28 @@ public class BookManager {
         isbn = scan.nextInt();
 
         bookService.delete(isbn);
+    }
+
+    /**
+     *
+     * LIST A BOOK TO DB
+     *
+     */
+    private static void listBook(){
+
+        // Call Book Service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        List<Book> listBooks = bookService.listBooks();
+
+        for ( Book book : listBooks ) {
+            System.out.println( "ISBN: " + book.getIsbn() + " => " + " Titre: " + book.getTitle()
+            + "\n Qantité: " + book.getQtyBooks() + " | Nombre de page: " + book.getNbPages()
+            + "\n Autheur: " + book.getAuthor().getName().toUpperCase() + " " + book.getAuthor().getFirstname().toUpperCase()
+            + "\n--- --- --- --- --- --- --- --- --- ---"
+            );
+        }
+
     }
 
 }
