@@ -53,4 +53,16 @@ public class BookServiceImpl {
             bookRepository.update(isbn, book);
     }
 
+    // Delete a book
+    public void delete( int isbn) {
+        Book book = bookRepository.getBookByIsbn(isbn);
+
+        if (book != null && book.getIsbn() != 0 ) {
+            bookRepository.delete(isbn);
+            System.out.println( "Le livre:" + book.getTitle() + " a bien été supprimé" );
+        } else {
+            System.out.println( "ISBN avec le numéro: " + isbn + " n'existe pas");
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package be.brahms.repositories;
 
 import be.brahms.entities.Author;
+import be.brahms.entities.Book;
 
 import java.util.List;
 

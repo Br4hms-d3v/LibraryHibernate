@@ -40,7 +40,10 @@ public class BookManager {
                     System.out.println(" \n Modifier un livre \n ");
                     updateBook();
                 }
-                case 3 -> {}
+                case 3 -> {
+                    System.out.println(" \n Supprimer un livre \n ");
+                    deleteBook();
+                }
                 case 4 -> {}
                 case 5 -> {}
                 case 6 -> {}
@@ -180,6 +183,25 @@ public class BookManager {
             }
 
         } while ( !stopMethode );
+    }
+
+    /**
+     *
+     * DELETE A BOOK TO DB
+     *
+     */
+    private static void deleteBook() {
+        // Call book Service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        //Declare variables
+        Scanner scan = new Scanner(System.in);
+        int isbn;
+
+        System.out.println( "Entrez le n° ISBN");
+        isbn = scan.nextInt();
+
+        bookService.delete(isbn);
     }
 
 }

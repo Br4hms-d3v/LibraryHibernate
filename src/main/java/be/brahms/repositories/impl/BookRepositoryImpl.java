@@ -66,8 +66,22 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int isbn) {
+        Session s = sf.openSession();
+        Transaction tx = null;
+        Book deleteBook = s.byNaturalId(Book.class)
+                .using("isbn", isbn) // Spécifie la propriété et sa valeur pour l'identifiant naturel
+                .load(); // Charge le livre en fonction de l'identifiant naturel fourni
 
+        try {
+            if (deleteBook != null) {
+                tx = s.beginTransaction();
+                s.remove(deleteBook);
+                tx.commit();
+            }
+        } finally {
+            s.close();
+        }
     }
 
     @Override
@@ -87,7 +101,15 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book getBookByIsbn(int isbn) {
-        return null;
+        Session s = sf.openSession();
+        try {
+            String hql = "FROM Book b WHERE b.isbn = :isbn";
+            Query query = s.createQuery(hql, Book.class);
+            query.setParameter("isbn", isbn);
+            return (Book) query.uniqueResult();
+        } finally {
+            s.close();
+        }
     }
 
     @Override
