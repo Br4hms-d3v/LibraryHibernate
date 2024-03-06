@@ -117,8 +117,8 @@ public class BookManager {
         newBook.setNbPages(nbPages);
 
         // Take data for AUTHOR
-        author.setName(name);
-        author.setFirstname(firstname);
+        author.setName(name.toUpperCase());
+        author.setFirstname(firstname.toLowerCase());
 
         // Persist author inside book
         newBook.setAuthor(author);
