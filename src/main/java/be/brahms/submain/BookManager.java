@@ -57,7 +57,10 @@ public class BookManager {
                     System.out.println( "\n Liste des livres par Author \n" );
                     listBookByAuthor();
                 }
-                case 7 -> {}
+                case 7 -> {
+                    System.out.println( "\n Chercher un livre par son ISBN \n" );
+                    bookByIsbn();
+                }
                 case 0 -> {
                     System.out.println( "Vous serez redirigé vers le menu principal" );
                     stopMethode = true;
@@ -284,6 +287,26 @@ public class BookManager {
         for( Book book : listBooks) {
             System.out.println("- " + book.getAuthor().getFirstname().charAt(0)  + " - " + book.getTitle() + " | " + book.getQtyBooks() + " en stock");
         }
+    }
+
+    private static void bookByIsbn() {
+
+        // Call book service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        // Declare variable
+        Scanner scan = new Scanner(System.in);
+        int isbn;
+
+        System.out.println( "Entrez le numéro ISBN du livre" );
+        isbn = Integer.parseInt(scan.nextLine());
+
+        Book bookIsbn = bookService.getBook(isbn);
+
+        System.out.println("- " + bookIsbn.getTitle() + " => " + bookIsbn.getAuthor().getName().toUpperCase() + " " + bookIsbn.getAuthor().getFirstname() + "\n"
+                + bookIsbn.getQtyBooks() + " en stock | " + bookIsbn.getNbPages() + " pages" );
+
+
     }
 
 }

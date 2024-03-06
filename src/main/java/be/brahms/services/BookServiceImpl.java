@@ -82,4 +82,8 @@ public class BookServiceImpl {
         return bookRepository.getBooksByAuthor(name);
     }
 
+    public Book getBook( int isbn) {
+        return bookRepository.getBookByIsbn(isbn);
+    }
+
 }
