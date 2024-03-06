@@ -101,8 +101,8 @@ public class ClientManager {
         phonenumber = scan.nextLine();
 
         Client newClient = new Client();
-        newClient.setName(name);
-        newClient.setFirstname(firstname);
+        newClient.setName(name.toUpperCase());
+        newClient.setFirstname(firstname.toLowerCase());
         newClient.setNiss(niss);
         newClient.setEmail(email);
         newClient.setPhoneNumber(phonenumber);
@@ -147,13 +147,13 @@ public class ClientManager {
                 case 1 -> {
                     System.out.println(" \n Entrez le nom de famille:" );
                     name = scan.nextLine();
-                    updateClient.setName(name);
+                    updateClient.setName(name.toUpperCase());
                     clientService.update(idClient, updateClient);
                 }
                 case 2 -> {
                     System.out.println(" \n Entrez le prénom:" );
                     firstname = scan.nextLine();
-                    updateClient.setFirstname(firstname);
+                    updateClient.setFirstname(firstname.toLowerCase());
                     clientService.update(idClient, updateClient);
                 }
                 case 3 -> {
@@ -197,7 +197,7 @@ public class ClientManager {
         List<Client> clients = clientService.getAllClients();
 
         for( Client client : clients ) {
-            System.out.println(" Niss => " + client.getNiss() + " | Nom et Prénom: " + client.getName().toUpperCase() + " " + client.getFirstname() +" ." +
+            System.out.println(" Niss => " + client.getNiss() + " | Nom et Prénom: " + client.getName().toUpperCase() + " " + client.getFirstname().toLowerCase() +" ." +
                     " | Email: " + client.getEmail() + " | GSM: " + client.getPhoneNumber());
         }
     }
@@ -236,11 +236,11 @@ public class ClientManager {
         //Declare variable
         String name;
 
-        System.out.println("Entrez le nom du client ");
+        System.out.println("Entrez le nom du client");
         name = scan.nextLine();
 
         //Call Service to find client with his name
-        List<Client> clientList = clientService.getClientsByName(name);
+        List<Client> clientList = clientService.getClientsByName(name.toUpperCase());
 
 
         for( Client client : clientList ) {
