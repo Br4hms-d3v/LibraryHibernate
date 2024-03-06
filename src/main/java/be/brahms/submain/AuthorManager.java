@@ -84,8 +84,8 @@ public class AuthorManager {
         firstname = scan.nextLine();
 
         // Taka variable and persit to DataBase
-        newAuthor.setName(name);
-        newAuthor.setFirstname(firstname);
+        newAuthor.setName(name.toUpperCase());
+        newAuthor.setFirstname(firstname.toLowerCase());
         authorService.create(newAuthor);
 
     }
@@ -124,13 +124,13 @@ public class AuthorManager {
                 case 1 -> {
                     System.out.println(" Entrez le nom de famille:");
                     name = scan.nextLine();
-                    updateAuthor.setName(name);
+                    updateAuthor.setName(name.toUpperCase());
                     authorService.update(idAuthor, updateAuthor);
                 }
                 case 2 -> {
                     System.out.println(" Entrez le prénom:");
                     firstname = scan.nextLine();
-                    updateAuthor.setFirstname(firstname);
+                    updateAuthor.setFirstname(firstname.toLowerCase());
                     authorService.update(idAuthor, updateAuthor);
                 }
                 case 0 -> {
@@ -158,7 +158,7 @@ public class AuthorManager {
         List<Author> listAuthors = authorService.getAllAuthors();
 
         for( Author author : listAuthors ) {
-            System.out.println(" N° " +author.getId() +" : " + author.getName() + " " + author.getFirstname() + " .");
+            System.out.println(" N° " +author.getId() +" : " + author.getFirstname().toLowerCase() + " " + author.getName().toUpperCase() + " .");
         }
     }
     /**
@@ -199,10 +199,10 @@ public class AuthorManager {
         System.out.println("Entrez le nom du client ");
         name = scan.nextLine();
 
-        List<Author> listAuthors = authorService.getAuthorByName(name);
+        List<Author> listAuthors = authorService.getAuthorByName(name.toUpperCase());
 
         for( Author author : listAuthors) {
-            System.out.println( "N° " + author.getId() + " ) " + author.getName() + " " + author.getFirstname());
+            System.out.println( "N° " + author.getId() + " ) " + author.getFirstname().toLowerCase() + " " + author.getName().toUpperCase() );
         }
 
 
