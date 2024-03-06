@@ -6,6 +6,8 @@ import be.brahms.repositories.BookRepository;
 import be.brahms.repositories.impl.AuthorRepositoryImpl;
 import be.brahms.repositories.impl.BookRepositoryImpl;
 
+import java.util.List;
+
 public class BookServiceImpl {
 
     // Call repositories
@@ -63,6 +65,25 @@ public class BookServiceImpl {
         } else {
             System.out.println( "ISBN avec le numéro: " + isbn + " n'existe pas");
         }
+    }
+
+    // List Books
+    public List<Book> listBooks() {
+        return bookRepository.getAllBooks();
+    }
+
+    // List books by title
+    public List<Book> listBookByTitle( String title) {
+        return bookRepository.getBooksByTitle(title);
+    }
+
+    // List books by author
+    public List<Book> listBooksByAuthor(String name) {
+        return bookRepository.getBooksByAuthor(name);
+    }
+
+    public Book getBook( int isbn) {
+        return bookRepository.getBookByIsbn(isbn);
     }
 
 }

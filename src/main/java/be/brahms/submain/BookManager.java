@@ -5,6 +5,7 @@ import be.brahms.entities.Author;
 import be.brahms.entities.Book;
 import be.brahms.services.BookServiceImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class BookManager {
@@ -44,10 +45,22 @@ public class BookManager {
                     System.out.println(" \n Supprimer un livre \n ");
                     deleteBook();
                 }
-                case 4 -> {}
-                case 5 -> {}
-                case 6 -> {}
-                case 7 -> {}
+                case 4 -> {
+                    System.out.println( "\n Liste des livres \n" );
+                    listBook();
+                }
+                case 5 -> {
+                    System.out.println( "\n Chercher un livre par titre \n" );
+                    listBookByTitle();
+                }
+                case 6 -> {
+                    System.out.println( "\n Liste des livres par Author \n" );
+                    listBookByAuthor();
+                }
+                case 7 -> {
+                    System.out.println( "\n Chercher un livre par son ISBN \n" );
+                    bookByIsbn();
+                }
                 case 0 -> {
                     System.out.println( "Vous serez redirigé vers le menu principal" );
                     stopMethode = true;
@@ -202,6 +215,98 @@ public class BookManager {
         isbn = scan.nextInt();
 
         bookService.delete(isbn);
+    }
+
+    /**
+     *
+     * LIST A BOOK FROM DB
+     *
+     */
+    private static void listBook(){
+
+        // Call Book Service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        List<Book> listBooks = bookService.listBooks();
+
+        for ( Book book : listBooks ) {
+            System.out.println( "ISBN: " + book.getIsbn() + " => " + " Titre: " + book.getTitle()
+            + "\n Qantité: " + book.getQtyBooks() + " | Nombre de page: " + book.getNbPages()
+            + "\n Autheur: " + book.getAuthor().getName().toUpperCase() + " " + book.getAuthor().getFirstname().toUpperCase()
+            + "\n--- --- --- --- --- --- --- --- --- ---"
+            );
+        }
+
+    }
+
+    /**
+     *
+     * LIST A BOOK BY TITLE
+     *
+     */
+    private static void listBookByTitle() {
+
+        // Call Book Service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        //Declare variable
+        Scanner scan = new Scanner(System.in);
+        String title;
+
+        System.out.println( "Entrez le titre du livre que vous recherchez");
+        title = scan.nextLine();
+
+        List<Book> listBooksByTitle = bookService.listBookByTitle(title);
+
+        for( Book book : listBooksByTitle) {
+            System.out.println( " - " + book.getIsbn() + " : " + book.getTitle() + " => " + book.getAuthor().getName() + " | " + book.getQtyBooks() + " en stock | " + book.getNbPages() + " pages");
+        }
+
+
+    }
+
+    /**
+     *
+     * LIST A BOOK BY AUTHOR
+     *
+     */
+    private static void listBookByAuthor() {
+
+        // Call book service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        // Declare variable
+        Scanner scan = new Scanner(System.in);
+        String name;
+
+        System.out.println( "Entrez le nom de l'auteur" );
+        name = scan.nextLine();
+
+        List<Book> listBooks = bookService.listBooksByAuthor(name);
+
+        for( Book book : listBooks) {
+            System.out.println("- " + book.getAuthor().getFirstname().charAt(0)  + " - " + book.getTitle() + " | " + book.getQtyBooks() + " en stock");
+        }
+    }
+
+    private static void bookByIsbn() {
+
+        // Call book service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        // Declare variable
+        Scanner scan = new Scanner(System.in);
+        int isbn;
+
+        System.out.println( "Entrez le numéro ISBN du livre" );
+        isbn = Integer.parseInt(scan.nextLine());
+
+        Book bookIsbn = bookService.getBook(isbn);
+
+        System.out.println("- " + bookIsbn.getTitle() + " => " + bookIsbn.getAuthor().getName().toUpperCase() + " " + bookIsbn.getAuthor().getFirstname() + "\n"
+                + bookIsbn.getQtyBooks() + " en stock | " + bookIsbn.getNbPages() + " pages" );
+
+
     }
 
 }
