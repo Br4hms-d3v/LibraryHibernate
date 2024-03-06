@@ -4,7 +4,6 @@ import be.brahms.Main;
 import be.brahms.entities.Book;
 import be.brahms.entities.Client;
 import be.brahms.entities.Reservation;
-import be.brahms.services.ClientServiceImpl;
 import be.brahms.services.ReservationServiceImpl;
 
 import java.util.Scanner;
@@ -43,7 +42,7 @@ public class ReservationManager {
                 }
                 case 2 -> {
                     System.out.println(" \n Le retour du livre \n " );
-
+                    backBook();
                 }
                 case 3 -> {
                     System.out.println(" \n Modification du délais d'un livre \n " );
@@ -102,6 +101,43 @@ public class ReservationManager {
 
         reservationService.reservation(newReservation);
 
+    }
+
+    /**
+     *
+     * BACK THE BOOK
+     *
+     */
+    private static void backBook() {
+        // Call reservation Service
+        ReservationServiceImpl reservationService = new ReservationServiceImpl();
+
+        // Declare variables
+        Reservation newReservation = new Reservation();
+        Client client = new Client();
+        Book book = new Book();
+
+        Scanner scan = new Scanner(System.in);
+        String niss;
+        int isbn;
+        long idReservation;
+
+        System.out.println( "Entrez l'ID de la reservation" );
+        idReservation = Long.parseLong(scan.nextLine());
+
+        System.out.println( "Entrez le Niss du client" );
+        niss = scan.nextLine();
+
+        System.out.println( "Entrez le numéro ISBN du livre " );
+        isbn = Integer.parseInt(scan.nextLine());
+
+        client.setNiss(niss);
+        book.setIsbn(isbn);
+
+        newReservation.setClient(client);
+        newReservation.setBook(book);
+
+        reservationService.backBook(idReservation, newReservation);
     }
 
 }

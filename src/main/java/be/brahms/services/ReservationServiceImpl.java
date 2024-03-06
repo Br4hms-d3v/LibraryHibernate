@@ -62,5 +62,34 @@ public class ReservationServiceImpl {
 
     }
 
+    public void backBook(long id, Reservation reservation) {
+
+        Client clientExisting = clientRepository.getByNiss(reservation.getClient().getNiss());
+        Book bookExisting = bookRepository.getBookByIsbn(reservation.getBook().getIsbn());
+        Reservation idReservation = reservationRepository.findById(id);
+
+        LocalDate dateBack = LocalDate.now();
+
+        if (clientExisting != null && bookExisting != null && idReservation != null) {
+            // Create a reservation for a book
+            idReservation.getClient().setId(clientExisting.getId());
+            idReservation.getBook().setId(bookExisting.getId());
+            idReservation.setDateBack(dateBack);
+            idReservation.setBack(true);
+
+            // Try to back the book in the repository
+            reservationRepository.backBook(id, idReservation);
+
+            // This is updated Quantity book
+            bookExisting.setQtyBooks(bookExisting.getQtyBooks() + 1);
+            System.out.println("=================> " + bookExisting.getIsbn()+ "===========>" + bookExisting.getQtyBooks());
+            bookRepository.update(bookExisting.getIsbn(), bookExisting);
+
+        } else {
+            System.out.println("Le numéro ISBN, le NISS du client ou l'id Réservation n'existe pas");
+        }
+
+    }
+
 
 }
