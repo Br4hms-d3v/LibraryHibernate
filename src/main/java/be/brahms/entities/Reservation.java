@@ -23,6 +23,9 @@ public class Reservation {
     @Column( name = "endBorrow", nullable = false )
     private LocalDate endBorrow;
 
+    @Column( name = "dateBack")
+    private LocalDate dateBack;
+
     @Column( name = "isBack", nullable = false )
     private boolean isBack;
 

@@ -1,6 +1,11 @@
 package be.brahms.submain;
 
 import be.brahms.Main;
+import be.brahms.entities.Book;
+import be.brahms.entities.Client;
+import be.brahms.entities.Reservation;
+import be.brahms.services.ClientServiceImpl;
+import be.brahms.services.ReservationServiceImpl;
 
 import java.util.Scanner;
 
@@ -34,7 +39,7 @@ public class ReservationManager {
             switch (choice) {
                 case 1 -> {
                     System.out.println(" \n Location d'un livre \n " );
-
+                    borrowBook();
                 }
                 case 2 -> {
                     System.out.println(" \n Le retour du livre \n " );
@@ -61,6 +66,41 @@ public class ReservationManager {
             }
 
         } while( !stopMethode );
+
+    }
+
+    /**
+     *
+     * BORROW A BOOK
+     *
+     */
+    private static void borrowBook() {
+
+        // Call reservation Service
+        ReservationServiceImpl reservationService = new ReservationServiceImpl();
+
+        // Declare variables
+        Reservation newReservation = new Reservation();
+        Client client = new Client();
+        Book book = new Book();
+
+        Scanner scan = new Scanner(System.in);
+        String niss;
+        int isbn;
+
+        System.out.println( "Entrez le Niss du client" );
+        niss = scan.nextLine();
+
+        System.out.println( "Entrez le numéro ISBN du livre " );
+        isbn = Integer.parseInt(scan.nextLine());
+
+        client.setNiss(niss);
+        book.setIsbn(isbn);
+
+        newReservation.setClient(client);
+        newReservation.setBook(book);
+
+        reservationService.reservation(newReservation);
 
     }
 
