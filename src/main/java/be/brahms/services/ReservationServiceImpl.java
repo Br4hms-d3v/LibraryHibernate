@@ -82,7 +82,6 @@ public class ReservationServiceImpl {
 
             // This is updated Quantity book
             bookExisting.setQtyBooks(bookExisting.getQtyBooks() + 1);
-            System.out.println("=================> " + bookExisting.getIsbn()+ "===========>" + bookExisting.getQtyBooks());
             bookRepository.update(bookExisting.getIsbn(), bookExisting);
 
         } else {
