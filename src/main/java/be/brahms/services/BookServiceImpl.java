@@ -77,4 +77,9 @@ public class BookServiceImpl {
         return bookRepository.getBooksByTitle(title);
     }
 
+    // List books by author
+    public List<Book> listBooksByAuthor(String name) {
+        return bookRepository.getBooksByAuthor(name);
+    }
+
 }

@@ -53,7 +53,10 @@ public class BookManager {
                     System.out.println( "\n Chercher un livre par titre \n" );
                     listBookByTitle();
                 }
-                case 6 -> {}
+                case 6 -> {
+                    System.out.println( "\n Liste des livres par Author \n" );
+                    listBookByAuthor();
+                }
                 case 7 -> {}
                 case 0 -> {
                     System.out.println( "Vous serez redirigé vers le menu principal" );
@@ -213,7 +216,7 @@ public class BookManager {
 
     /**
      *
-     * LIST A BOOK TO DB
+     * LIST A BOOK FROM DB
      *
      */
     private static void listBook(){
@@ -233,6 +236,11 @@ public class BookManager {
 
     }
 
+    /**
+     *
+     * LIST A BOOK BY TITLE
+     *
+     */
     private static void listBookByTitle() {
 
         // Call Book Service
@@ -252,6 +260,30 @@ public class BookManager {
         }
 
 
+    }
+
+    /**
+     *
+     * LIST A BOOK BY AUTHOR
+     *
+     */
+    private static void listBookByAuthor() {
+
+        // Call book service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        // Declare variable
+        Scanner scan = new Scanner(System.in);
+        String name;
+
+        System.out.println( "Entrez le nom de l'auteur" );
+        name = scan.nextLine();
+
+        List<Book> listBooks = bookService.listBooksByAuthor(name);
+
+        for( Book book : listBooks) {
+            System.out.println("- " + book.getAuthor().getFirstname().charAt(0)  + " - " + book.getTitle() + " | " + book.getQtyBooks() + " en stock");
+        }
     }
 
 }
