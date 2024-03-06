@@ -49,7 +49,10 @@ public class BookManager {
                     System.out.println( "\n Liste des livres \n" );
                     listBook();
                 }
-                case 5 -> {}
+                case 5 -> {
+                    System.out.println( "\n Chercher un livre par titre \n" );
+                    listBookByTitle();
+                }
                 case 6 -> {}
                 case 7 -> {}
                 case 0 -> {
@@ -227,6 +230,27 @@ public class BookManager {
             + "\n--- --- --- --- --- --- --- --- --- ---"
             );
         }
+
+    }
+
+    private static void listBookByTitle() {
+
+        // Call Book Service
+        BookServiceImpl bookService = new BookServiceImpl();
+
+        //Declare variable
+        Scanner scan = new Scanner(System.in);
+        String title;
+
+        System.out.println( "Entrez le titre du livre que vous recherchez");
+        title = scan.nextLine();
+
+        List<Book> listBooksByTitle = bookService.listBookByTitle(title);
+
+        for( Book book : listBooksByTitle) {
+            System.out.println( " - " + book.getIsbn() + " : " + book.getTitle() + " => " + book.getAuthor().getName() + " | " + book.getQtyBooks() + " en stock | " + book.getNbPages() + " pages");
+        }
+
 
     }
 

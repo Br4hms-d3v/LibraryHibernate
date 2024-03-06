@@ -99,12 +99,22 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public List<Book> getBooksByTitle() {
-        return null;
+    public List<Book> getBooksByTitle(String title) {
+        Session s = sf.openSession();
+
+        try {
+            String hql = "SELECT b FROM Book b WHERE b.title LIKE :title";
+            Query<Book> query = s.createQuery(hql, Book.class);
+            query.setParameter("title", "%" + title + "%");
+            return query.getResultList();
+        } finally {
+            s.close();
+        }
+
     }
 
     @Override
-    public List<Book> getBooksByAuthor() {
+    public List<Book> getBooksByAuthor(String name) {
         return null;
     }
 

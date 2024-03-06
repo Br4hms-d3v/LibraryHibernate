@@ -72,4 +72,9 @@ public class BookServiceImpl {
         return bookRepository.getAllBooks();
     }
 
+    // List books by title
+    public List<Book> listBookByTitle( String title) {
+        return bookRepository.getBooksByTitle(title);
+    }
+
 }

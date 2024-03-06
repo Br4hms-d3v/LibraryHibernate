@@ -10,8 +10,8 @@ public interface BookRepository {
     Book update(int isbn, Book book);
     void delete( int isbn );
     List<Book> getAllBooks();
-    List<Book> getBooksByTitle();
-    List<Book> getBooksByAuthor();
+    List<Book> getBooksByTitle( String title);
+    List<Book> getBooksByAuthor(String name);
     Book getBookByIsbn(int isbn);
     boolean existingIsbn(int isbn);
 
