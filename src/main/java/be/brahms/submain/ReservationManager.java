@@ -197,8 +197,8 @@ public class ReservationManager {
 
         List<Reservation> listBookBorrow = reservationService.listBookBorrowByClient(niss);
 
-        for( Reservation book : listBookBorrow) {
-            System.out.println(book.getBook().getTitle());
+        for( Reservation bookReserved : listBookBorrow) {
+            System.out.println( "N° " + bookReserved.getId()+ " - " +bookReserved.getBook().getTitle() + " | à remettre avant le : " + bookReserved.getEndBorrow());
         }
     }
 
