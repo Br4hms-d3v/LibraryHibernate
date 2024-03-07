@@ -121,4 +121,9 @@ public class ReservationServiceImpl {
         return reservationRepository.getAllBookByAuthor(niss);
     }
 
+    // List client who borrow a book by title
+    public List<Reservation> listBookBorrowByTitle(String title ) {
+        return reservationRepository.getAllBookByTitle(title);
+    }
+
 }

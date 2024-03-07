@@ -92,4 +92,19 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         }
 
     }
+
+    @Override
+    public List<Reservation> getAllBookByTitle(String title) {
+        Session s = sf.openSession();
+
+        try {
+            String hql = "FROM Reservation r WHERE  r.isBack = false  AND r.book.title LIKE :title";
+            Query<Reservation> query = s.createQuery(hql, Reservation.class);
+            query.setParameter("title", "%" + title + "%");
+
+            return query.getResultList();
+        } finally {
+            s.close();
+        }
+    }
 }

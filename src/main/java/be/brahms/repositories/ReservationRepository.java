@@ -11,4 +11,5 @@ public interface ReservationRepository {
     Reservation updateDeadline(long id, Reservation reservation);
     Reservation findById(long id);
     List<Reservation> getAllBookByAuthor( String niss);
+    List<Reservation> getAllBookByTitle( String title);
 }

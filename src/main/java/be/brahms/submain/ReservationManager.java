@@ -55,7 +55,7 @@ public class ReservationManager {
                 }
                 case 5 -> {
                     System.out.println(" \n Voir la liste des clients qui ont loué via isbn \n " );
-
+                    bookBorrowByTitle();
                 }
                 case 0 -> {
                     System.out.println(" Vous serez rediriger vers le menu principal");
@@ -202,4 +202,29 @@ public class ReservationManager {
         }
     }
 
+    /**
+     *
+     * LIST BOOK BORROW BY TITLE
+     *
+     */
+    private static void bookBorrowByTitle() {
+
+        //Call reservation service
+        ReservationServiceImpl reservationService = new ReservationServiceImpl();
+
+        // Declare variables
+        Scanner scan = new Scanner(System.in);
+        String title;
+
+        System.out.println( "Entrez le titre du livre" );
+        title = scan.nextLine();
+
+        List<Reservation> listBookBorrow = reservationService.listBookBorrowByTitle(title);
+
+        for( Reservation bookReserved : listBookBorrow) {
+            System.out.println( "N° " + bookReserved.getId()+ " - " +bookReserved.getBook().getTitle()
+                    + " | loué par :" + bookReserved.getClient().getName() + " " + bookReserved.getClient().getFirstname().charAt(0)
+                    +  " à remettre avant le : " + bookReserved.getEndBorrow());
+        }
+    }
 }
