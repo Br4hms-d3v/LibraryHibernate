@@ -6,6 +6,7 @@ import be.brahms.entities.Client;
 import be.brahms.entities.Reservation;
 import be.brahms.services.ReservationServiceImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ReservationManager {
@@ -50,7 +51,7 @@ public class ReservationManager {
                 }
                 case 4 -> {
                     System.out.println(" \n Voir la liste des livres loué par le client \n " );
-
+                    bookBorrowByClient();
                 }
                 case 5 -> {
                     System.out.println(" \n Voir la liste des clients qui ont loué via isbn \n " );
@@ -175,6 +176,30 @@ public class ReservationManager {
         newReservation.setBook(book);
 
         reservationService.updateDeadlineBook(idReservation, newReservation);
+    }
+
+    /**
+     *
+     * LIST BOOK BORROW BY CLIENT
+     *
+     */
+    private static void bookBorrowByClient() {
+
+        //Call reservation service
+        ReservationServiceImpl reservationService = new ReservationServiceImpl();
+
+        // Declare variables
+        Scanner scan = new Scanner(System.in);
+        String niss;
+
+        System.out.println( "Entrez le numré NISS du client" );
+        niss = scan.nextLine();
+
+        List<Reservation> listBookBorrow = reservationService.listBookBorrowByClient(niss);
+
+        for( Reservation book : listBookBorrow) {
+            System.out.println(book.getBook().getTitle());
+        }
     }
 
 }

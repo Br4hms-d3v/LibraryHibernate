@@ -6,8 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ReservationRepositoryImpl implements ReservationRepository {
 
@@ -69,6 +71,22 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         Session s = sf.openSession();
         try {
             return s.get(Reservation.class, id);
+        } finally {
+            s.close();
+        }
+
+    }
+
+    @Override
+    public List<Reservation> getAllBookByAuthor(String niss) {
+        Session s = sf.openSession();
+
+        try {
+            String hql = "FROM Reservation r WHERE  r.isBack = false  AND r.client.niss = :niss";
+            Query<Reservation> query = s.createQuery(hql, Reservation.class);
+            query.setParameter("niss", niss);
+
+            return query.getResultList();
         } finally {
             s.close();
         }

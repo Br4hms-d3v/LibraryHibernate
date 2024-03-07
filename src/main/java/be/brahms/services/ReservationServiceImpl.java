@@ -11,6 +11,7 @@ import be.brahms.repositories.impl.ClientRepositoryImpl;
 import be.brahms.repositories.impl.ReservationRepositoryImpl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ReservationServiceImpl {
 
@@ -115,5 +116,9 @@ public class ReservationServiceImpl {
         }
     }
 
+    // List client who borrow a book
+    public List<Reservation> listBookBorrowByClient(String niss ) {
+        return reservationRepository.getAllBookByAuthor(niss);
+    }
 
 }
