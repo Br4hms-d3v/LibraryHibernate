@@ -107,4 +107,19 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             s.close();
         }
     }
+
+    @Override
+    public List<Reservation> getAllBookByISBN(int isbn) {
+        Session s = sf.openSession();
+
+        try {
+            String hql = "FROM Reservation r WHERE  r.isBack = false  AND r.book.isbn = :isbn";
+            Query<Reservation> query = s.createQuery(hql, Reservation.class);
+            query.setParameter("isbn", isbn);
+
+            return query.getResultList();
+        } finally {
+            s.close();
+        }
+    }
 }

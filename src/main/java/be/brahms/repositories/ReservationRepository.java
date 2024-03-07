@@ -12,4 +12,5 @@ public interface ReservationRepository {
     Reservation findById(long id);
     List<Reservation> getAllBookByAuthor( String niss);
     List<Reservation> getAllBookByTitle( String title);
+    List<Reservation> getAllBookByISBN(int isbn);
 }

@@ -126,4 +126,9 @@ public class ReservationServiceImpl {
         return reservationRepository.getAllBookByTitle(title);
     }
 
+    // List client who borrow a book by ISBN
+    public List<Reservation> listBookBorrowByISBN(int isbn) {
+        return reservationRepository.getAllBookByISBN(isbn);
+    }
+
 }
