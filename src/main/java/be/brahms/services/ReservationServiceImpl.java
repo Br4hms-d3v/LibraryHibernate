@@ -27,7 +27,7 @@ public class ReservationServiceImpl {
         this.bookRepository = new BookRepositoryImpl();
     }
 
-    // Reservation a book for client
+
     public void reservation(Reservation reservation) {
 
         Client clientExisting = clientRepository.getByNiss(reservation.getClient().getNiss());
@@ -46,12 +46,13 @@ public class ReservationServiceImpl {
            reservation.setEndBorrow(endDate);
            reservation.setBack(false);
 
-           if( bookExisting.getQtyBooks() > 0) {
+           if( bookExisting.getQtyBooks() >1) {
                reservationRepository.reserveBook(reservation);
 
                // This is updated Quantity book
                bookExisting.setQtyBooks(bookExisting.getQtyBooks() - 1);
                bookRepository.update(bookExisting.getIsbn(), bookExisting);
+               System.out.println(" Vous avec bien réservé le livre pour le client ");
            } else {
                System.out.println(" Malheureusement nous n'avons plus de stock");
            }
@@ -62,6 +63,7 @@ public class ReservationServiceImpl {
 
     }
 
+    // Client hands over the book
     public void backBook(long id, Reservation reservation) {
 
         Client clientExisting = clientRepository.getByNiss(reservation.getClient().getNiss());
@@ -88,6 +90,29 @@ public class ReservationServiceImpl {
             System.out.println("Le numéro ISBN, le NISS du client ou l'id Réservation n'existe pas");
         }
 
+    }
+
+    // Client add the deadline for the book
+    public void updateDeadlineBook( long id, Reservation reservation) {
+        Client clientExiste = clientRepository.getByNiss(reservation.getClient().getNiss());
+        Book bookExiste = bookRepository.getBookByIsbn(reservation.getBook().getIsbn());
+        Reservation idReservation = reservationRepository.findById(id);
+
+        LocalDate endBorrow = idReservation.getEndBorrow();
+
+        if (clientExiste != null && bookExiste != null && idReservation != null) {
+            // Create a reservation for a book
+            idReservation.getClient().setId(clientExiste.getId());
+            idReservation.getBook().setId(bookExiste.getId());
+            idReservation.setEndBorrow(endBorrow.plusDays(7));
+            idReservation.setBack(false);
+
+            // Try to back the book in the repository
+            reservationRepository.backBook(id, idReservation);
+
+        } else {
+            System.out.println("Le numéro ISBN, le NISS du client ou l'id Réservation n'existe pas");
+        }
     }
 
 

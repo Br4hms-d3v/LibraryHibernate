@@ -1,6 +1,5 @@
 package be.brahms.repositories.impl;
 
-import be.brahms.entities.Client;
 import be.brahms.entities.Reservation;
 import be.brahms.repositories.ReservationRepository;
 import org.hibernate.Session;
@@ -42,6 +41,24 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             s.merge(reservation);
             tx.commit();
             return backBook;
+        } finally {
+            s.close();
+        }
+    }
+
+    @Override
+    public Reservation updateDeadline(long id, Reservation reservation) {
+        Session s = sf.openSession();
+        Transaction tx = null;
+
+        try {
+
+            Reservation updateDeadline = s.get(Reservation.class, id);
+
+            tx = s.beginTransaction();
+            s.merge(reservation);
+            tx.commit();
+            return updateDeadline;
         } finally {
             s.close();
         }
