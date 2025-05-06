@@ -41,4 +41,4 @@ build/
 /env.properties
 
 # Ignore dataBase.properties
-src/main/resources/dataBase.properties
+/src/main/resources/dataBase.properties
