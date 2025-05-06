@@ -39,3 +39,6 @@ build/
 
 # Ignore environment properties file
 /env.properties
+
+# Ignore dataBase.properties
+src/main/resources/dataBase.properties
